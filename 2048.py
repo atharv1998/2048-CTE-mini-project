@@ -1,6 +1,7 @@
 import pygame
 import random
 import copy
+import time
 pygame.init()
 RED =   (255,   0,   0)
 WHITE = (255, 255, 255)
@@ -39,18 +40,19 @@ def nos():
     pygame.display.flip()
 def keys():
     global key,temp
+    time.sleep(.1)
     a=pygame.key.get_pressed()
     for i in range(0,len(a)):
         if(a[i]==1):
             if(i==273):
-                    if(key!='up'and temp!='up'):
+                    if(key!='up'):
                         key='up'
                         temp='up'
                         print(key)
                     else:
                         key=0
             elif(i==276):
-                    if(key!='left'and temp!='left'):
+                    if(key!='left'):
                         key='left'
                         temp='left'
                         print(key)
@@ -58,14 +60,14 @@ def keys():
                         key=0
 
             elif(i==275):
-                    if(key!='right'and temp!='right'):
+                    if(key!='right'):
                         key='right'
                         temp='right'
                         print(key)
                     else:
                         key=0
             elif(i==274):
-                    if(key!='down'and temp!='down'):
+                    if(key!='down'):
                         key='down'
                         temp='down'
                         print(key)
@@ -74,7 +76,7 @@ def keys():
 
 def display():
     global screen
-    size = [502, 502]
+    size = [402, 402]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("2048")
     done = False
@@ -92,6 +94,10 @@ def display():
 def logic():
     global board,key
     if (key=='up'):
+        screen.fill(WHITE)
+        grid()
+        nos()
+        key=0
         for k in range(0,4):
             for j in range(0,3):
                 for i in range(0,4):
@@ -109,6 +115,7 @@ def logic():
         screen.fill(WHITE)
         grid()
         nos()
+        key=0
         for k in range(0,4):
             for j in range(2,-1,-1):
                 for i in range(0,4):
@@ -126,6 +133,7 @@ def logic():
         screen.fill(WHITE)
         grid()
         nos()
+        key=0
         for k in range(0,4):
             for i in range(0,3):
                 for j in range(0,4):
@@ -143,6 +151,7 @@ def logic():
         screen.fill(WHITE)
         grid()
         nos()
+        key=0
         for k in range(0,4):
             for i in range(2,-1,-1):
                 for j in range(0,4):
