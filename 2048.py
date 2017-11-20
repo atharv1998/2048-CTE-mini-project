@@ -10,12 +10,13 @@ temp=0
 board=[[' ',' ',' ',' '],[' ',' ',' ',' '],[' ',' ',' ',' '],[' ',' ',' ',' ']]
 board[random.randint(0,3)][random.randint(0,3)]=2
 def random1():
+    global board
     while(True):
         a=random.randint(0,3)
         b=random.randint(0,3)
         if(board[a][b]==' '):
             board[a][b]=2
-            print(a )
+            print(a)
             print(b)
             break
 random1()
@@ -34,8 +35,7 @@ def nos():
             no=str(board[i][j])
             myfont = pygame.font.SysFont('dejavuserif',37)
             label = myfont.render(no,10, RED)
-            print(board)
-            screen.blit(label, (5+j*100,20+i*100))
+            screen.blit(label, (5+i*100,20+j*100))
     pygame.display.flip()
 def keys():
     global key,temp
@@ -73,7 +73,6 @@ def keys():
                         key=0
 
 def display():
-
     global screen
     size = [502, 502]
     screen = pygame.display.set_mode(size)
@@ -93,10 +92,6 @@ def display():
 def logic():
     global board,key
     if (key=='up'):
-        random1()
-        screen.fill(WHITE)
-        grid()
-        nos()
         for k in range(0,4):
             for j in range(0,3):
                 for i in range(0,4):
@@ -106,22 +101,28 @@ def logic():
                     elif(board[i][j+1]==board[i][j] and board[i][j]!=' '):
                         board[i][j]=2*int(board[i][j+1])
                         board[i][j+1]=' '
-    if (key=='down'):
         random1()
+        screen.fill(WHITE)
+        grid()
+        nos()
+    if (key=='down'):
         screen.fill(WHITE)
         grid()
         nos()
         for k in range(0,4):
             for j in range(2,-1,-1):
                 for i in range(0,4):
-                    if(board[i][j]==' 'and board[i][j+1]!=board[i][j]):
+                    if(board[i][j+1]==' 'and board[i][j+1]!=board[i][j]):
                         board[i][j+1]=board[i][j]
-                        board[i][j-1]=' '
-                    elif(board[i][j-1]==board[i][j]and board[i][j]!=' '):
-                        board[i][j]=2*int(board[i][j-1])
-                        board[i][j-1]=' '
-    if (key=='left'):
+                        board[i][j]=' '
+                    elif(board[i][j+1]==board[i][j]and board[i][j]!=' '):
+                        board[i][j]=2*int(board[i][j+1])
+                        board[i][j+1]=' '
         random1()
+        screen.fill(WHITE)
+        grid()
+        nos()
+    if (key=='left'):
         screen.fill(WHITE)
         grid()
         nos()
@@ -134,20 +135,27 @@ def logic():
                     elif(board[i+1][j]==board[i][j]and board[i][j]!=' '):
                         board[i][j]=2*int(board[i+1][j])
                         board[i+1][j]=' '
-    if (key=='right'):
         random1()
+        screen.fill(WHITE)
+        grid()
+        nos()
+    if (key=='right'):
         screen.fill(WHITE)
         grid()
         nos()
         for k in range(0,4):
             for i in range(2,-1,-1):
                 for j in range(0,4):
-                    if(board[i][j]==' 'and board[i+1][j]!=board[i][j]):
+                    if(board[i+1][j]==' 'and board[i+1][j]!=board[i][j]):
                         board[i+1][j]=board[i][j]
                         board[i][j]=' '
                     elif(board[i+1][j]==board[i][j]and board[i][j]!=' '):
                         board[i+1][j]=2*int(board[i][j])
                         board[i][j]=' '
+        random1()
+        screen.fill(WHITE)
+        grid()
+        nos()
     pygame.display.flip()
     keys()
 
